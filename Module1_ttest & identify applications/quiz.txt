@@ -1,0 +1,23 @@
+Q1.Which of the following situations would be one where we would use a one sample ttest?
+A.When we want to determine if a population mean is equal to a reference value.
+
+Q4.Consider the following test: A gasoline additive is created to reduce the amount 
+of carbon monoxide (CO) in a car's exhaust. A sample of cars is chosen: half of 
+them are given the additive and half are not. Test the null hypothesis that the 
+amount of CO in the exhaust is not significantly different for the cars with the 
+additive compared to cars without the additive.
+
+What type of test is being performed here?
+A.Two-sample independant t-test
+
+Q5. (statistic= -0.6337, pvalue=0.53005) at alpha level .05
+A.We fail to reject the null hypothesis. 
+
+Q6.Which of the following choice gives the best definition of null hypotheses in two
+independent sample test
+A.The null hypothesis always proposes that there is no difference between the means of the two populations.
+
+
+
+
+

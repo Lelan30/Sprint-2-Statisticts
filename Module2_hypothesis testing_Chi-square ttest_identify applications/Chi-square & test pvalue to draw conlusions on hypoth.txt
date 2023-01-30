@@ -1,0 +1,75 @@
+#Using a chi-squared test p-value to draw the correct
+#conclusion about null and alternative hypothesis
+
+#When we perform a hypothesis test, we calculate a p-value
+#Using the significance level we decided on before performing
+#our test, we have enough information to either:
+#1: reject or 2: fail to reject
+#1)p-value < alpha: reject null hypothesis
+#2)p_value > alpha fail to reject hypothesis
+
+#Using dice roll statistics as our data set, we're going to work
+#through the whole process of stating the null hypothesis, performing
+#a chi-square test, deciding on the significance level, determining
+#the p-value, and then making a decision on the null hypothesis.
+
+#we can estimate the expected frequency for each value by
+#using a random number generator.
+
+#Null Hypotheses: "Dice are not fair"
+
+#We "rolled" five dice, each a total
+#of 50 times. Here are the results, along with the total for each
+#value between 1-6
+
+import numpy as np
+#create array for each die value
+a1 = [13, 7, 10, 5, 13]
+a2 = [5, 7, 4, 12, 9]
+a3 = [5, 9, 14, 0, 10]
+a4 = [12, 13, 8, 7, 7]
+a5 = [7, 10, 9, 13, 6]
+a6 = [8, 4, 5, 13, 5]
+
+#combine into (6,5) array
+dice = np.array([a1, a2, a3, a4, a5, a6])
+
+#import stats module
+from scipy.stats import chi2_contingency
+
+#perform chi squared test
+stat, p, dof, expected = chi2_contingency(dice, correction=False)
+
+#print out stats in NICE format
+print('Expected values: \n ', expected.round(2))
+print('The degree of freedom: ', dof)
+print(f'The Chi squared statistic is: {stat:.3f}')
+print(f'the p value is: {p:6f}')
+
+#now we use the chi squared probability table
+#and significant level to interpret results
+
+#alpha=0.005
+#calculated chi square = 40.375 is greater than 39.997
+#to conclude results are random
+
+#create np array
+a1 = [4, 3, 5, 11, 4]
+a2 = [9, 15, 10, 4, 11]
+a3 = [7, 10, 8, 6, 8]
+a4 = [13, 6, 8, 9, 12]
+a5 = [9, 9, 7, 11, 6]
+a6 = [8, 7, 12, 9, 9]
+
+dice = np.array([a1, a2, a3, a4, a5, a6])
+
+#perform chi squared test
+stat, p, dof, expected = chi2_contingency(dice, correction=False)
+print('Expected values \n ', expected.round(2))
+print(f'The chi squared statistic is: {stat:.3f}')
+print(f'The p value is: {p:.6f}')
+
+#For this trial, we'll use an alpha level of 0.01. Our calculated chi-square 
+#of 21.989 is less than 37.566. As with the example above, we can also use the 
+#calculated p-value. In this case, our p-value of 0.34 is greater than our alpha 
+#of 0.01, so we can't reject the null hypothesis.

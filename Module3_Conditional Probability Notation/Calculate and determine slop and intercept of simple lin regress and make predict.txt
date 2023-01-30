@@ -1,0 +1,68 @@
+##Calculate and Interpret the Slope and Intercept of a Simple Linear Regression Model and Make a Prediction
+
+#Ordinary Least Squares(OLS):
+#finds the best-fit line by finding parameters for
+#the line equation that minimize the error square
+
+#1)Linear Equations:
+#y=mx + b (x is independant variable or feature y is dependant)
+#(m is the slope of the line) and (b is the term for beta)
+
+#y=b0+b^1x where b0 is not the intercept and b^1 is the slope
+
+#use the concrete and strength data set again and fit
+#linear regression to conrete strength and content cement
+import numpy as np
+import pandas as pd
+url = 'https://raw.githubusercontent.com/bloominstituteoftechnology/data-science-practice-datasets/main/unit_1/Concrete/Concrete_Data.csv'
+concrete = pd.read_csv(url)
+concrete.head()
+
+#use scikit_learn library Linear Regression() model to find
+#best-fit line
+
+#import the predictor class
+from sklearn.linear_model import LinearRegression
+
+#Instantiate the class(default parameters)
+model = LinearRegression()
+
+#assign the data to x and y variables
+
+x = concrete['cement']
+X = x[:, np.newaxis]        #create a column vector
+y = concrete['strength']
+model.fit(X,y)
+
+#pull the slope and intercept parameters out of model
+#that we could fit
+
+#slope data also called the model coefficient
+print('The slope: ', model.coef_)
+
+#Intercept
+print('The intercept: ', model.intercept_)
+
+#in equation form
+print('Best-fit line: y = {:.2f}x + {:.2f}'.format(model.coef_[0], model.intercept_))
+
+#plot data
+import matplotlib.pyplot as plt
+
+plt.scatter(x=x, y=y, alpha=0.5)
+
+#plot best-fit line
+x_bestfit = np.linspace(100, 60, 10)
+y_bestfit = 0.08*x_bestfit + 13.44
+plt.plot(x_bestfit, y_bestfit, color='red')
+
+plt.xlabel('Cement content (kg/cubic meter')
+plt.ylabel('Compressive strength')
+plt.title('Concrete Properties')
+
+plt.clf
+
+#select the value of our independant variable(cement content)
+#and predict the strength
+#lets choose cement = 600 and plug in equation for best-fit line
+#y = 0.08x + 13.44 = 0.08 * 600 + 13.44 = 61

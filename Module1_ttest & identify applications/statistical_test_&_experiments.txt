@@ -1,0 +1,26 @@
+#The sample population we have consists of 50 individuals,
+# with a mean heart rate of 69 beats per minute (bpm) and
+# a standard deviation of 6.5 bpm. We'd like to compare this
+# to the population mean heart rate of 72 bpm.
+
+from scipy import stats
+import numpy as np
+
+#generate the random test scores with specified mean, std, and sample size
+rvs = stats.norm.rvs(loc=69,size=50,random_state=42)
+
+#Display test scores as a check
+print(rvs)
+
+#check sample mean and std
+print('the mean of the sample: ', rvs.mean())
+print('the standard deviation of the sample: ', rvs.std())
+
+#calculate the t value using the ttest 1 samp
+stats.ttest_1samp(rvs, popmean=72)
+
+#calculate t value
+tstatistic = (67.53-72)/(6.01/np.sqrt(50))
+print('The t-statistic is: ', tstatistic)
+
+

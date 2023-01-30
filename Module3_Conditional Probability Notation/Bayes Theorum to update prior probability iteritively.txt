@@ -1,0 +1,34 @@
+# Import the usual libraries
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set the number of flips
+N = 15000
+
+# Set the bias of the coin
+BIAS_HEADS = 0.6
+
+# The range of biases the coin could have
+# (0, 0.01, 0.02, ... 0.98, 0.99, 1)
+bias_range = np.linspace(0, 1, 101)
+
+# Uniform prior distribution
+# (start with coins that have the same bias)
+prior_bias_heads = np.ones(len(bias_range)) / len(bias_range)
+
+# Create a random series of 0's and 1's (coin flips) with the bias
+flip_series = (np.random.rand(N) <= BIAS_HEADS).astype(int)
+
+# For each flip, calculate the probabilities and update
+for flip in flip_series:
+    likelihood = bias_range**flip * (1-bias_range)**(1-flip)
+    evidence = np.sum(likelihood * prior_bias_heads)
+    prior_bias_heads = likelihood * prior_bias_heads / evidence
+
+# Create the plot
+plt.figure(figsize=(8,6))
+plt.plot(bias_range, prior_bias_heads)
+plt.xlabel('Heads Bias')
+plt.ylabel('P(Heads Bias)')
+
+plt.clf() 

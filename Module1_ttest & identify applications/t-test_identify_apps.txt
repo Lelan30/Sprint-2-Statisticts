@@ -1,0 +1,23 @@
+# Import the libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Create the t-distributions
+t_df10 = np.random.standard_t(df=10, size=100)
+t_df100 = np.random.standard_t(df=100, size=1000)
+t_df1000 = np.random.standard_t(df=1000, size=10000)
+
+# Create the normal distribution
+s = np.random.normal(size=10000)
+
+# Create the figure and axes objects and plots
+fig, ax = plt.subplots(1)
+
+# Plot t-distributions
+ax = sns.kdeplot(t_df10, color='r');
+ax = sns.kdeplot(t_df100, color='y');
+ax = sns.kdeplot(t_df1000, color='b');
+
+# Plot normal distributions
+sns.kdeplot(s, color='k');

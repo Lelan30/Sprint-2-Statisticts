@@ -1,0 +1,42 @@
+Inferential Statistics
+
+#Error:
+#the random variation when we are drawing random samples
+#from a distribution
+
+#When we sample from a population, we calculate the mean
+#of that sample. Then, when we sample from that population
+#again, we get different values, which can (and usually do)
+#have a different mean. So if we took 1000 samples from the
+#population, we would have 1000 various sample means. We call
+#this set of 1000 sample means a sampling distribution, and
+#this distribution has a mean (a mean of the means). This mean
+#of the means has a unique name: the expected value of the mean.
+
+#We can calculate the standard deviation of these means. Remember that the standard deviation is the sum of the squared
+#difference between the mean
+
+#To calculate the standard error of the mean (sem), we take the standard deviation of our sample (s) and divide by the
+#number of samples
+
+#We'll use an example from the food industry and examine  Cereal WeightsLinks to an external site.. Note: this is not an
+#'actual company or product; the data is generated. In most cereal factories, automated machinery fills each cereal box,
+#and the box's weight is on the package. The cereal weights data set provides the mean weight (in ounces) of 10,000
+#sampling distributions of cereal boxes. Each box is supposed to contain 20 ounces of cereal (minus the weight of the bag/box).
+
+import pandas as pd
+import scipy.stats as stats
+
+#Load the data into DataFrame
+cereal = pd.read_csv('cereal_weights.csv')
+
+#look at general statistics
+print(cereal.describe())
+
+#calculate standard error of the mean (sem)
+stderr_mean = stats.sem(cereal['weight'])
+print('The standard error of the mean: ', stderr_mean.round(6))
+
+#The expected mean for this population of cereal is the advertised weight: 20 ounces. However, the sample distribution
+#mean of 20.5 ounces with a standard deviation of 0.2 ounces would suggest that the factory equipment isn't hitting the
+#exact target of 20 ounces: 20.5 ± 0.2 gives a range of 20.3 to 20.7 ounces.

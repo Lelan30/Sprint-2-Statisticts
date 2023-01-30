@@ -1,0 +1,44 @@
+#The process of this set of hypotheses might look something like the following:
+
+#First, we state our null hypothesis: The mean heart rate in individuals who do
+#cardiovascular exercise is not different from the mean heart rate of the rest of
+#the population (78bpm).
+
+#Second, we determine the alternative hypothesis:
+#The mean heart rate in individuals who do cardiovascular exercise is different from
+#the mean heart rate in the rest of the population (78bpm).
+#We select a representative sample of cardiovascular exercise individuals and calculate
+#the mean and SD heart rate.
+
+#the null hypothesis is written out as:
+#Ho : U(\mu) = reference value
+
+#where \mu is the population mean of all
+#individuals doing cardiovascular exercise:
+#H0 : U(\mu) = 78
+
+#The p-value is the probability of observing our sample mean
+#if the null hypothesis is true.
+#p-value < alpha: reject the null hypothesis
+#p-value > alpha: fail to reject the null hypothesis
+#We never accept a null hypothesis or prove it to be true, we can only fail to reject it.
+
+#We want to test if a new method of teaching physics increases understanding as measured by higher scores on a particular
+#physics test. Therefore, a random sample of 50 students who have learned using this new method is selected, and the mean
+#score on the physics test is determined to be 74.6 with a standard deviation of 12.3.
+#We then want to compare this to the entire population of physics test scores, where the mean is 67.5.
+
+#calculate with scipy, create random test score for the general
+#student pop
+
+from scipy import stats
+
+#Here are the 50 score from the class
+rvs = stats.norm.rvs(loc=74.6, scale=12.3, size=50, random_state=42)
+
+#calculate the t statistic for p-value
+stats.ttest_1samp(rvs, 67.5)
+
+
+
+

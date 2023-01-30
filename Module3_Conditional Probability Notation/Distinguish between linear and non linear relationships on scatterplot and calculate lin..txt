@@ -1,0 +1,34 @@
+import pandas as pd
+url = 'https://raw.githubusercontent.com/bloominstituteoftechnology/data-science-practice-datasets/main/unit_1/Concrete/Concrete_Data.csv'
+
+#use these columns
+mycols = ['cement', 'water', 'coarse_agg', 'strength']
+concrete = pd.read_csv(url, usecols=mycols)
+
+#create a pairplot with seaborn library, pairs of values
+#on scatterplot grid
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.pairplot(concrete)
+plt.savefig('/Users/nicole/data_science_LS/data-science-canvas-images/unit_1/sprint_3/new/mod1_obj2_concrete_pair.png',
+            transparent=False, dpi=100)
+
+plt.show()
+plt.clf()
+
+#plot above: We can see our 4 features and how they
+#correlate to each other
+#choose 2 features and calculate correlation between them
+
+from scipy.stats import stats
+#calculate correlation coefficient(return only coefficient)
+strength_cement, _ = pearsonr(concrete['strenght'], concrete['cement'])
+strength_water, _ = pearsonr(concrete['strenght'], concrete['water'])
+
+print('The correlation between strength-cement:' , round(strength_cement, 3))
+print('The correlation between strength-water:' , round(strength_water, 2))
+
+#we can see the positive correlation(0.498) between the concrete strength
+#and cement content - as the cement increases, the strength of the concrete
+#increases. and its opposite on the other hand concerning the negative value
+#(-0.29)

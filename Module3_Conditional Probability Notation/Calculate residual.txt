@@ -1,0 +1,19 @@
+##Calculate the residual for one data point
+
+import pandas as pd
+url = 'https://raw.githubusercontent.com/bloominstituteoftechnology/data-science-practice-datasets/main/unit_1/Concrete/Concrete_Data.csv'
+concrete = pd.read_csv(url)
+print(concrete.head())
+
+#using the 5th data point index[4] plug in the content value:
+#198.6 into Linear Regression Equation
+#y = 0.08x + 13.44
+
+#where y is the predicted concrete strength and x is the cement
+#content
+#y = 0.08 * 198.6 + 13.44 = 29.3
+
+#the observed strength value for this cement content was:
+#44.3 so the residual is: 44.30-29.3=15
+
+

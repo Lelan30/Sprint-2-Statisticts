@@ -1,0 +1,19 @@
+#set up a chi squared test for independence on two
+#categorical variables
+
+import numpy as np
+from scipy.stats import chi2_contingency
+
+#re-create the table as a np array
+table = np.array([[200,290], [400,910]])
+
+#print table
+print('Contingency table: \n', table)
+
+#perform chi-squared test
+stat, p, dof, expected = chi2_contingency(table, correction= False)
+
+#print
+print('Expected values: \n', expected.round(2))
+print(f'The chi square statistic is: {stat:.3f}')
+print(f'The p Value is: {p:.64}')

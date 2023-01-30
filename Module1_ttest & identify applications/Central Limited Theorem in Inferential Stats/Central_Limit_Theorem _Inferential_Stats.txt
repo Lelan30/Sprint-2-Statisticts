@@ -1,0 +1,83 @@
+#Central Limit Distribution:
+#when we draw at least ~30 samples from a non-normal distribution (eg: exponential distribution),
+#and plot the mean of all the samples, the resulting plot will be normally distributed.
+#formally:
+#if you have a population with a mean and standard deviation, and take sufficiently large samples
+#from it, the sample means will be approximately normally distributed.
+
+#The central limit theorem holds true when the number of samples is at least ~30.
+
+#We'll use the exponential distribution for this example since it has a non-symmetric shape that
+#differs from the normal distribution.
+
+# Import the necessary libraries (statistics, plotting)
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set the style-sheet
+plt.style.use('seaborn-bright')
+
+# Create the figure and axes objects
+fig, ax = plt.subplots(1, 1, figsize=(8,6))
+
+# Create an exponential distribution
+# (with a sample size of 1000)
+data_exp = stats.expon.rvs(size=1000)
+
+# Plot the distribution and the kernel density estimate (KDE)
+ax = sns.histplot(data_exp, kde=True, bins=100)
+
+# Set the axis labels
+ax.set(xlabel='Exponential Distribution', ylabel='Frequency')
+
+fig.clf() #comment/delete to plot
+
+# Create a list of means for each set of samples
+
+###
+# Initialize the list to hold the means
+rs_means_n25 = []
+# Loop 25 times, fill the list with 25 sample means
+for i in range(25):
+    # Draw random samples from the exponential distribution
+    rs_exp = np.random.exponential(scale=1.0, size=1000)
+    # Append the mean of the random sample
+    rs_means_n25.append(rs_exp.mean())
+
+###
+# Initialize the list to hold the means
+rs_means_n100 = []
+
+# Loop 100 times, fill the list with 100 sample means
+for i in range(100):
+    # Draw random samples from the exponential distribution
+    rs_exp = np.random.exponential(scale=1.0, size=1000)
+    # Append the mean of the random sample
+    rs_means_n100.append(rs_exp.mean())
+
+###
+# Initialize the list to hold the means
+rs_means_n1000 = []
+# Loop 1000 times, fill the list with 1000 sample means
+for i in range(1000):
+    # Draw random samples from the exponential distribution
+    rs_exp = np.random.exponential(scale=1.0, size=1000)
+    # Append the mean of the random sample
+    rs_means_n1000.append(rs_exp.mean())
+# Create the figure, axes objects
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(10,4))
+
+# Plot each example on the correspond axis
+sns.histplot(rs_means_n25, kde=True, bins=100, ax=ax1)
+ax1.set(xlabel='n=25', ylabel='Frequency')
+
+sns.histplot(rs_means_n100, kde=True, bins=100, ax=ax2)
+ax2.set(xlabel='n=100')
+
+sns.histplot(rs_means_n1000, kde=True, bins=100, ax=ax3)
+ax3.set(xlabel='n=1000');
+
+fig.clf() #comment/delete to plot
+
